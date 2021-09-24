@@ -4,11 +4,17 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +22,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.TaskList;
+import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +121,28 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        ListView<Task> listView = new ListView<Task>();
+        listView.setItems(logic.getTaskList());
+        listView.setCellFactory(task -> new TaskListViewCell());
+
+        Label label = new Label("Tasks");
+        label.setFont(new Font(24));
+        label.setPadding(new Insets(16, 16, 0, 16));
+        VBox box = new VBox(label, listView);
+        box.getStyleClass().add("pane-with-border");
+//        box.setPadding(new Insets(16, 16, 0, 16));
+        box.setSpacing(8);
+        taskListPanelPlaceholder.getChildren().add(box);
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        label = new Label("Address Book");
+        label.setFont(new Font(24));
+        label.setPadding(new Insets(16, 16, 0, 16));
+        box = new VBox(label, personListPanel.getRoot());
+        box.getStyleClass().add("pane-with-border");
+//        box.setPadding(new Insets(16, 16, 0, 16));
+        box.setSpacing(8);
+        personListPanelPlaceholder.getChildren().add(box);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -6,4 +6,9 @@ public class Timestamp {
     public Timestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return this.timestamp;
+    }
 }

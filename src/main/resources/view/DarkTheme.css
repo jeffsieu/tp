@@ -157,6 +157,11 @@
     -fx-text-fill: black !important;
 }
 
+.label {
+    -fx-text-fill: white;
+    -fx-font-family: "Open Sans Light";
+}
+
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;

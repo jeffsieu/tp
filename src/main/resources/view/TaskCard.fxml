@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="id" text="\$id" />
+      <VBox HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="name" text="\$name" />
+            <Label fx:id="timestamp" text="\$timestamp" />
+            <Label fx:id="description" text="\$description" />
+         </children>
+      </VBox>
+      <CheckBox fx:id="isCompleted" mnemonicParsing="false" />
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
+   </padding>
+</HBox>
