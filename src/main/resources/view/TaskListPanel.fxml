@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="8.0" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label styleClass="label-header-small" text="TASKS">
-         <padding>
-            <Insets left="16.0" right="16.0" top="16.0" />
-         </padding>
-      </Label>
-      <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
-   </children>
+<VBox spacing="8.0" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox spacing="8.0">
+            <children>
+                <Label styleClass="label-header-small" text="TASKS"/>
+                <VBox>
+                    <children>
+                        <Label styleClass="label-header-small" text="Add filter"/>
+                        <ComboBox fx:id="filterComboBox" prefWidth="150.0" styleClass="filter-combo-box"/>
+                    </children>
+                </VBox>
+                <FlowPane fx:id="filterFlowPane" hgap="4.0" vgap="4.0"/>
+            </children>
+            <VBox.margin>
+                <Insets bottom="16.0" left="16.0" top="16.0"/>
+            </VBox.margin>
+        </VBox>
+        <ListView fx:id="taskListView" VBox.vgrow="ALWAYS"/>
+    </children>
 </VBox>

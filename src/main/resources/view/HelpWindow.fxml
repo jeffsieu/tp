@@ -14,266 +14,305 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-  <icons>
-    <Image url="@/images/help_icon.png" />
-  </icons>
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@Fonts.css" />
-        <URL value="@HelpWindow.css" />
-      </stylesheets>
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/help_icon.png"/>
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@Fonts.css"/>
+                <URL value="@HelpWindow.css"/>
+            </stylesheets>
 
-      <HBox alignment="CENTER" prefHeight="554.0" prefWidth="461.0">
-        <children>
-               <ScrollPane prefHeight="852.0" prefWidth="446.0">
-                  <content>
-                     <VBox>
-                        <children>
-                           <HBox alignment="CENTER" prefHeight="57.0" prefWidth="380.0">
-                              <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to TaskMaster2103" textAlignment="CENTER" wrappingWidth="362.13671875">
-                                    <font>
-                                       <Font name="System Bold Italic" size="18.0" />
-                                    </font>
-                                 </Text>
-                              </children>
-                           </HBox>
-                           <HBox alignment="CENTER" prefHeight="81.0" prefWidth="432.0">
-                              <children>
-                                 <VBox alignment="CENTER" prefHeight="48.0" prefWidth="430.0">
-                                    <children>
-                                       <HBox alignment="CENTER" prefHeight="23.0" prefWidth="429.0">
-                                          <children>
-                                        <Label graphicTextGap="0.0" text="Refer to the " />
-                                        <Hyperlink onAction="#openUrl" text="User Guide" />
-                                        <Label graphicTextGap="0.0" text=" for more information. " />
-                                          </children>
-                                       </HBox>
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox prefHeight="29.0" prefWidth="411.0">
-                              <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This is a simple user guide to help you get started:" wrappingWidth="292.13671875" />
-                              </children>
-                           </HBox>
-                           <HBox prefHeight="22.0" prefWidth="331.0">
-                              <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commands Available:" underline="true" wrappingWidth="292.13671875" />
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="60.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="62.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="1. List People">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: list" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shows a list of all persons in the address book" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="editHBox" prefHeight="80.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="166.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="97.0" text="2. Edit People">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edits the person specified at INDEX" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="3. Find People">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: find KEYWORD [MORE_KEYWORDS]" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finds people whose names contain any of the given keywords" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="4. Delete People">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: delete INDEX" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deletes the specified person from the address book" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="105.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="5. Add Task">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: task add TITLE [d/DESCRIPTION] [ts/TIMESTAMP] [tag/TAG}" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Allows the user to add a task to the current database. Each task has a compulsory title field, and textual description, timestamp, and tag as optional fields." wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="70.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="6. Edit Task">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: task edit INDEX [t/TITLE] [d/DESCRIPTION] [ts/TIMESTAMP] [tag/TAG]…" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edits an existing task in the task list" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="60.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="7. Complete Task">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: task done INDEX" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Completes an existing task in the task list" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="8. Delete Task">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: task delete INDEX" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Completes an existing task in the task list" wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="62.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="64.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="9. Clear">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: clear" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clears all entries from the address book." wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                           <HBox id="listHBox" prefHeight="70.0" prefWidth="432.0">
-                              <children>
-                                 <VBox prefHeight="87.0" prefWidth="432.0">
-                                    <children>
-                                       <Label prefHeight="17.0" prefWidth="405.0" text="10. Exit">
-                                          <font>
-                                             <Font name="System Bold" size="12.0" />
-                                          </font>
-                                       </Label>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: exit" wrappingWidth="398.13671875">
-                                          <font>
-                                             <Font name="Consolas" size="12.0" />
-                                          </font>
-                                       </Text>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exits the program." wrappingWidth="398.13671875" />
-                                    </children>
-                                 </VBox>
-                              </children>
-                           </HBox>
-                        </children>
-                     </VBox>
-                  </content>
-                  <padding>
-                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                  </padding>
-               </ScrollPane>
-        </children>
+            <HBox alignment="CENTER" prefHeight="554.0" prefWidth="461.0">
+                <children>
+                    <ScrollPane prefHeight="852.0" prefWidth="446.0">
+                        <content>
+                            <VBox>
+                                <children>
+                                    <HBox alignment="CENTER" prefHeight="57.0" prefWidth="380.0">
+                                        <children>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                  text="Welcome to TaskMaster2103" textAlignment="CENTER"
+                                                  wrappingWidth="362.13671875">
+                                                <font>
+                                                    <Font name="System Bold Italic" size="18.0"/>
+                                                </font>
+                                            </Text>
+                                        </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="81.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox alignment="CENTER" prefHeight="48.0" prefWidth="430.0">
+                                                <children>
+                                                    <HBox alignment="CENTER" prefHeight="23.0" prefWidth="429.0">
+                                                        <children>
+                                                            <Label graphicTextGap="0.0" text="Refer to the "/>
+                                                            <Hyperlink onAction="#openUrl" text="User Guide"/>
+                                                            <Label graphicTextGap="0.0" text=" for more information. "/>
+                                                        </children>
+                                                    </HBox>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox prefHeight="29.0" prefWidth="411.0">
+                                        <children>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                  text="This is a simple user guide to help you get started:"
+                                                  wrappingWidth="292.13671875"/>
+                                        </children>
+                                    </HBox>
+                                    <HBox prefHeight="22.0" prefWidth="331.0">
+                                        <children>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commands Available:"
+                                                  underline="true" wrappingWidth="292.13671875"/>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="60.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="62.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="1. List People">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: list"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Shows a list of all persons in the address book"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="editHBox" prefHeight="80.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="166.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="97.0" text="2. Edit People">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Edits the person specified at INDEX"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="3. Find People">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: find KEYWORD [MORE_KEYWORDS]"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Finds people whose names contain any of the given keywords"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="4. Delete People">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: delete INDEX" wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Deletes the specified person from the address book"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="105.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="5. Add Task">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: task add TITLE [d/DESCRIPTION] [ts/TIMESTAMP] [tag/TAG}"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Allows the user to add a task to the current database. Each task has a compulsory title field, and textual description, timestamp, and tag as optional fields."
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="70.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="6. Edit Task">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: task edit INDEX [t/TITLE] [d/DESCRIPTION] [ts/TIMESTAMP] [tag/TAG]…"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Edits an existing task in the task list"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="60.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="7. Complete Task">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: task done INDEX" wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Completes an existing task in the task list"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="61.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="8. Delete Task">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="format: task delete INDEX" wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Completes an existing task in the task list"
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="62.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="64.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="9. Clear">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: clear"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Clears all entries from the address book."
+                                                          wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                    <HBox id="listHBox" prefHeight="70.0" prefWidth="432.0">
+                                        <children>
+                                            <VBox prefHeight="87.0" prefWidth="432.0">
+                                                <children>
+                                                    <Label prefHeight="17.0" prefWidth="405.0" text="10. Exit">
+                                                        <font>
+                                                            <Font name="System Bold" size="12.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="format: exit"
+                                                          wrappingWidth="398.13671875">
+                                                        <font>
+                                                            <Font name="Consolas" size="12.0"/>
+                                                        </font>
+                                                    </Text>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                          text="Exits the program." wrappingWidth="398.13671875"/>
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                        </content>
+                        <padding>
+                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                        </padding>
+                    </ScrollPane>
+                </children>
 
 
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </HBox>
+                <opaqueInsets>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
+                </padding>
+            </HBox>
 
 
-    </Scene>
-  </scene>
+        </Scene>
+    </scene>
 </fx:root>

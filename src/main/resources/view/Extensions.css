@@ -27,3 +27,30 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.filter-chip {
+    -fx-background-radius: 50;
+    -fx-background-color: #2F2F2F;
+}
+
+.filter-chip .button {
+    -fx-background-color: transparent;
+    -fx-padding: 2 6 2 6;
+    -fx-margin: 0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-width: 0;
+}
+
+.filter-chip .button:hover {
+    -fx-background-color: #383838;
+    -fx-background-radius: 100;
+}
+
+.filter-combo-box.combo-box-base .list-cell {
+    -fx-text-fill: transparent;
+}
+
+.filter-combo-box .combo-box-popup .list-cell {
+    -fx-text-fill: white;
+}

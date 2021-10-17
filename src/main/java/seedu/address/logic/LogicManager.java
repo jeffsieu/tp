@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 import seedu.address.storage.Storage;
 import seedu.address.ui.exceptions.GuiException;
 
@@ -69,6 +71,31 @@ public class LogicManager implements Logic {
         } catch (IOException ioe) {
             throw new GuiException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
+    }
+
+    @Override
+    public void addTaskFilter(TaskFilter taskFilter) {
+        model.addTaskFilter(taskFilter);
+    }
+
+    @Override
+    public void removeTaskFilter(TaskFilter taskFilter) {
+        model.removeTaskFilter(taskFilter);
+    }
+
+    @Override
+    public void setTaskFilters(List<TaskFilter> taskFilters) {
+        model.setTaskFilters(taskFilters);
+    }
+
+    @Override
+    public ObservableList<TaskFilter> getAvailableTaskFilters() {
+        return model.getAvailableTaskFilters();
+    }
+
+    @Override
+    public ObservableList<TaskFilter> getSelectedTaskFilters() {
+        return model.getSelectedTaskFilters();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.guiactions.GuiAction;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 
 /**
  * The API of the Model component.
@@ -103,6 +105,28 @@ public interface Model {
     /** Returns an unmodifiable view of the task list */
     ObservableList<Task> getFilteredTaskList();
 
+    /**
+     * Returns a list of available task filters.
+     * @return The list of available task filters
+     */
+    ObservableList<TaskFilter> getAvailableTaskFilters();
+
+    /**
+     * Returns the list of selected filters to filter tasks by.
+     * @return The list of selected filters to filter tasks by
+     */
+    ObservableList<TaskFilter> getSelectedTaskFilters();
+
+    void addTaskFilter(TaskFilter taskFilter);
+    void removeTaskFilter(TaskFilter taskFilter);
+    void setTaskFilters(List<TaskFilter> taskFilter);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @param predicate The new predicate to filter by
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
     ReadOnlyTaskList getTaskList();
 
     /**
@@ -119,5 +143,9 @@ public interface Model {
      */
     Task getTaskAtIndex(int index) throws IndexOutOfBoundsException;
 
+    /**
+     * Executes the given GUI action with the model context.
+     * @param action The GUI action to execute
+     */
     void executeGuiAction(GuiAction action);
 }

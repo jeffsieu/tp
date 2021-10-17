@@ -122,7 +122,14 @@ public class MainWindow extends UiPart<Stage> {
             });
         };
 
-        TaskListPanel taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), taskEditor);
+        TaskListPanel taskListPanel = new TaskListPanel(
+                logic.getFilteredTaskList(),
+                logic.getAvailableTaskFilters(),
+                logic.getSelectedTaskFilters(),
+                logic::addTaskFilter,
+                logic::removeTaskFilter,
+                taskEditor
+        );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());

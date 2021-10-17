@@ -3,6 +3,41 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+.combo-box-base
+{
+    -fx-background-color: #252525;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.combo-box-base:hover,
+.combo-box-base:hover .list-cell
+{
+    -fx-background-color: #2E2E2E;
+}
+
+.combo-box .list-cell {
+    -fx-font-size: 12pt;
+}
+
+.combo-box-base .list-cell
+{
+    -fx-padding: 3 0 2 7;
+    -fx-background-color: #252525;
+    -fx-background-radius: 5;
+}
+
+.combo-box-popup .list-cell
+{
+    -fx-background-radius: 0;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #424d5f;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
@@ -119,7 +154,7 @@
     -fx-border-width: 1;
 }
 
-.list-cell .label {
+.list-cell {
     -fx-text-fill: white;
 }
 

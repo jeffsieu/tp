@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -12,6 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 import seedu.address.ui.exceptions.GuiException;
 
 /**
@@ -32,6 +34,23 @@ public interface Logic {
      * @param action The GUI action to execute
      */
     void executeGuiAction(GuiAction action) throws GuiException;
+
+    void addTaskFilter(TaskFilter taskFilter);
+    void removeTaskFilter(TaskFilter taskFilter);
+    void setTaskFilters(List<TaskFilter> taskFilters);
+
+
+    /**
+     * Returns a list of available task filters.
+     * @return The list of available task filters
+     */
+    ObservableList<TaskFilter> getAvailableTaskFilters();
+
+    /**
+     * Returns the list of selected filters to filter tasks by.
+     * @return The list of selected filters to filter tasks by
+     */
+    ObservableList<TaskFilter> getSelectedTaskFilters();
 
     /**
      * Returns the AddressBook.
