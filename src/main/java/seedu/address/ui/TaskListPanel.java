@@ -1,11 +1,13 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
@@ -25,6 +27,9 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private FlowPane filterFlowPane;
 
+    @FXML
+    private Button newTaskButton;
+
     private final ObservableList<TaskFilter> availableTaskFilters;
     private final ObservableList<TaskFilter> selectedTaskFilters;
 
@@ -38,6 +43,7 @@ public class TaskListPanel extends UiPart<Region> {
             ObservableList<TaskFilter> selectedTaskFilters,
             Consumer<TaskFilter> addTaskFilter,
             Consumer<TaskFilter> removeTaskFilter,
+            Consumer<Task> addTask,
             TaskEditor taskEditor) {
         super("TaskListPanel.fxml");
         this.availableTaskFilters = availableTaskFilters;
@@ -64,8 +70,15 @@ public class TaskListPanel extends UiPart<Region> {
         selectedTaskFilters.addListener((Observable observable) -> {
             filterFlowPane.getChildren().clear();
             selectedTaskFilters.stream()
-                    .map(taskFilter -> new TaskFilterChip(taskFilter, removeTaskFilter).getRoot())
+                    .map(taskFilter -> new DeletableChip(taskFilter.toString(), () ->
+                            removeTaskFilter.accept(taskFilter)).getRoot())
                     .forEach(filterFlowPane.getChildren()::add);
+        });
+
+        newTaskButton.setOnAction(event -> {
+            EditTaskDialog editTaskDialog = new EditTaskDialog(null);
+            Optional<Task> newTask = editTaskDialog.getDialog().showAndWait();
+            newTask.ifPresent(addTask);
         });
     }
 

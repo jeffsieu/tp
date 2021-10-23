@@ -8,7 +8,7 @@
 <HBox alignment="CENTER_LEFT" spacing="4.0" styleClass="filter-chip" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="filterNameLabel" text="Label">
+        <Label fx:id="nameLabel" text="Label">
             <HBox.margin>
                 <Insets/>
             </HBox.margin>

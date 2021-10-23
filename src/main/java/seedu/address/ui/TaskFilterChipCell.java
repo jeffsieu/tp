@@ -12,7 +12,8 @@ public class TaskFilterChipCell extends ListCell<TaskFilters.TaskFilter> {
         if (empty || taskFilter == null) {
             setGraphic(null);
         } else {
-            setGraphic(new TaskFilterChip(taskFilter, getListView().getItems()::remove).getRoot());
+            setGraphic(new DeletableChip(taskFilter.toString(), () ->
+                 getListView().getItems().remove(taskFilter)).getRoot());
         }
     }
 }

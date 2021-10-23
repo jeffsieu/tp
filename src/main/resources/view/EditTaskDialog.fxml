@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="16.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox>
+         <children>
+            <Label text="Title" />
+            <TextField fx:id="title" styleClass="text-field" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Timestamp" />
+            <TextField fx:id="timestamp" styleClass="text-field" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Description" />
+            <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0;" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Label text="Tags" />
+            <TextField fx:id="tagInput" promptText="Enter tag name..." />
+            <Label fx:id="tagErrorLabel" text="Label" />
+            <FlowPane fx:id="tagPane" hgap="8.0" prefWidth="200.0" vgap="8.0" />
+         </children>
+      </VBox>
+      <CheckBox fx:id="isDone" mnemonicParsing="false" text="Mark as done" />
+   </children>
+   <padding>
+      <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@DarkTheme.css" />
+      <URL value="@Extensions.css" />
+      <URL value="@Fonts.css" />
+   </stylesheets>
+</VBox>

@@ -350,6 +350,43 @@
     -fx-padding: 8 1 8 1;
 }
 
+.text-field {
+    -fx-background-color: #2E2E2E;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+}
+
+.text-area,
+.text-area .content,
+.text-area:focused .content {
+    -fx-background-insets: 0;
+    -fx-background-color: #2E2E2E, transparent, #2E2E2E, transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+}
+
+.text-area {
+    border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+    -fx-background-insets: 0;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+.check-box {
+    -fx-text-fill: white;
+ }
+
+.check-box .box {
+    -fx-background-color: #383838;
+    -fx-border-color: white;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
