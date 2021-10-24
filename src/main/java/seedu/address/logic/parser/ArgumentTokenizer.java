@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -70,9 +72,15 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
-        return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+        // Prefix must be after a space, and before a space or the end of the command
+        Pattern p = Pattern.compile(" " + prefix + "(?:\\s|$)");
+        Matcher m = p.matcher(argsString.substring(fromIndex));
+        if (m.find()) {
+            int position = m.start();
+            return fromIndex + position + 1;
+        } else {
+            return -1;
+        }
     }
 
     /**
