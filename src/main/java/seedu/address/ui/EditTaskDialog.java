@@ -8,6 +8,7 @@ import java.util.Optional;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -49,6 +50,9 @@ public class EditTaskDialog extends UiPart<Region> {
     @FXML
     private Label tagErrorLabel;
 
+    @FXML
+    private Label titleErrorLabel;
+
     private final ObservableSet<Tag> tags;
     private final Dialog<Task> dialog;
 
@@ -69,6 +73,10 @@ public class EditTaskDialog extends UiPart<Region> {
         timestamp.setText(task.map(Task::getTimestamp).map(Timestamp::toString).orElse(""));
         isDone.setSelected(task.map(Task::getIsDone).orElse(false));
         tagErrorLabel.setText("");
+        titleErrorLabel.setText("Title cannot be empty");
+        titleErrorLabel.getStyleClass().add("error");
+        titleErrorLabel.setVisible(false);
+        titleErrorLabel.setManaged(false);
 
         //Set the application icon.
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
@@ -89,6 +97,11 @@ public class EditTaskDialog extends UiPart<Region> {
         ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(buttonTypeOk, buttonTypeCancel);
+        dialog.getDialogPane().lookupButton(buttonTypeOk).addEventFilter(ActionEvent.ACTION, event -> {
+            if (!areFieldsValid()) {
+                event.consume();
+            }
+        });
 
         tags = task.map(Task::getTags)
                 .map(tags -> tags.toArray(new Tag[]{}))
@@ -96,6 +109,8 @@ public class EditTaskDialog extends UiPart<Region> {
                 .orElse(FXCollections.observableSet());
 
         title.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            titleErrorLabel.setVisible(false);
+            titleErrorLabel.setManaged(false);
             if (event.getCode().equals(KeyCode.ENTER)) {
                 event.consume();
                 timestamp.requestFocus();
@@ -138,6 +153,18 @@ public class EditTaskDialog extends UiPart<Region> {
         });
     }
 
+    private boolean areFieldsValid() {
+        if (title.getText().isBlank()) {
+            titleErrorLabel.setVisible(true);
+            titleErrorLabel.setManaged(true);
+            return false;
+        } else {
+            titleErrorLabel.setVisible(false);
+            titleErrorLabel.setManaged(false);
+            return true;
+        }
+    }
+
     public Dialog<Task> getDialog() {
         return dialog;
     }
@@ -145,8 +172,8 @@ public class EditTaskDialog extends UiPart<Region> {
     private Task getTask() {
         return new Task(
                 title.getText(),
-                description.getText(),
-                new Timestamp(timestamp.getText()),
+                Optional.of(description.getText()).filter(text -> !text.isBlank()).orElse(null),
+                Optional.of(timestamp.getText()).filter(text -> !text.isBlank()).map(Timestamp::new).orElse(null),
                 tags,
                 isDone.isSelected()
         );

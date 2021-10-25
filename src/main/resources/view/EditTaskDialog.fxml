@@ -13,8 +13,9 @@
    <children>
       <VBox>
          <children>
-            <Label text="Title" />
+            <Label text="Title *" />
             <TextField fx:id="title" styleClass="text-field" />
+            <Label fx:id="titleErrorLabel" />
          </children>
       </VBox>
       <VBox>
