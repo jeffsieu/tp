@@ -25,7 +25,7 @@ import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.filters.TaskFilters;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.storage.CommandHistory;
 import seedu.address.testutil.PersonBuilder;
 
@@ -165,32 +165,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<TaskFilters.TaskFilter> getAvailableTaskFilters() {
+        public ObservableList<TaskFilter> getAvailableTaskFilters() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<TaskFilters.TaskFilter> getSelectedTaskFilters() {
+        public ObservableList<TaskFilter> getSelectedTaskFilters() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addTaskFilter(TaskFilters.TaskFilter taskFilter) {
+        public void addTaskFilter(TaskFilter taskFilter) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeTaskFilter(TaskFilters.TaskFilter taskFilter) {
+        public void removeTaskFilter(TaskFilter taskFilter) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setTaskFilters(List<TaskFilters.TaskFilter> taskFilter) {
+        public void setTaskFilters(List<TaskFilter> taskFilter) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<TaskFilters.TaskFilter> getOldTaskFilters() {
+        public List<TaskFilter> getOldTaskFilters() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -43,7 +44,7 @@ public class Task {
      * @param isDone The completion status of the task
      */
     public Task(String title, String description, Timestamp timestamp, Set<Tag> tags, boolean isDone) {
-        requireAllNonNull(title);
+        requireAllNonNull(title, tags);
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
@@ -56,12 +57,12 @@ public class Task {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Optional<Timestamp> getTimestamp() {
+        return Optional.ofNullable(timestamp);
     }
 
     public Set<Tag> getTags() {

@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.TaskCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
+import seedu.address.model.task.filters.TaskFilter;
 
 /**
  * Completes an existing task in the task list.

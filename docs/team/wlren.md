@@ -23,10 +23,10 @@ Technologies: Flutter, Unity, AWS (Cloud Practitioner certified)
 #### [Multiverse](https://github.com/wlren/multiverse)
 - Attained highest level of “Artemis” (top 8% in cohort of 700) in CP2106 Independent Software
   Development Project
-  
+
 - Identified poor UX in NUS Campus related applications and designed a solution of a mobile
     application which integrates 4 campus applications under a single dashboard
-    
+
 - Co-built android application using Flutter and Firebase, with emphasis on proper Software
     Development Life Cycle, using Mockito as unit testing library
 

@@ -1,0 +1,12 @@
+@startuml
+start
+:Request task deletion;
+if () then ([Task contains deleted tags])
+  :Remove deleted tags' task filters\nfrom available;
+  :Remove deleted tags' task filters\nfrom selected filters;
+else ([else])
+endif
+:Delete task;
+:Recompute filtered task list;
+stop
+@enduml

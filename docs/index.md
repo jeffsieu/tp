@@ -26,7 +26,7 @@ For **contributing to the project**:
 
 ## About Us
 
-Please refer to the [About Us](https://github.com/AY2122S1-CS2103-F09-2/tp/blob/master/docs/AboutUs.md) document.  
+Please refer to the [About Us](https://github.com/AY2122S1-CS2103-F09-2/tp/blob/master/docs/AboutUs.md) document.
 
 ## User Guide
 

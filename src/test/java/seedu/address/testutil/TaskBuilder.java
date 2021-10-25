@@ -38,8 +38,8 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         title = taskToCopy.getTitle();
-        description = taskToCopy.getDescription();
-        timestamp = taskToCopy.getTimestamp();
+        description = taskToCopy.getDescription().orElse(null);
+        timestamp = taskToCopy.getTimestamp().orElse(null);
         isDone = taskToCopy.getIsDone();
         tags = new HashSet<>(taskToCopy.getTags());
     }

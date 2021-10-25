@@ -63,14 +63,28 @@ public class EditTaskDialog extends UiPart<Region> {
     public EditTaskDialog(Task t) {
         super(FXML);
 
+        // Initialize final fields
+        Optional<Task> task = Optional.ofNullable(t);
+        tags = task.map(Task::getTags)
+                .map(tags -> tags.toArray(new Tag[]{}))
+                .map(FXCollections::observableSet)
+                .orElse(FXCollections.observableSet());
         dialog = new Dialog<>();
 
-        Optional<Task> task = Optional.ofNullable(t);
-        dialog.setTitle(task.isPresent() ? "Edit Task" : "Add Task");
+        // Initialize fields from task
+        initializeFields(t);
+        initializeDialog(t != null);
 
+        //Set the application icon.
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(getImage(ICON_APPLICATION));
+    }
+
+    private void initializeFields(Task t) {
+        Optional<Task> task = Optional.ofNullable(t);
         title.setText(task.map(Task::getTitle).orElse(""));
-        description.setText(task.map(Task::getDescription).orElse(""));
-        timestamp.setText(task.map(Task::getTimestamp).map(Timestamp::toString).orElse(""));
+        description.setText(task.flatMap(Task::getDescription).orElse(""));
+        timestamp.setText(task.flatMap(Task::getTimestamp).map(Timestamp::toString).orElse(""));
         isDone.setSelected(task.map(Task::getIsDone).orElse(false));
         tagErrorLabel.setText("");
         titleErrorLabel.setText("Title cannot be empty");
@@ -78,10 +92,52 @@ public class EditTaskDialog extends UiPart<Region> {
         titleErrorLabel.setVisible(false);
         titleErrorLabel.setManaged(false);
 
-        //Set the application icon.
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(getImage(ICON_APPLICATION));
+        description.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                event.consume();
 
+                if (event.isShiftDown()) {
+                    // Focus on previous
+                    timestamp.requestFocus();
+                } else {
+                    // Focus on next
+                    tagInput.requestFocus();
+                }
+            }
+        });
+
+        // Add chip for each tag
+        tags.stream()
+                .map(tag -> new DeletableChip(tag.tagName, () -> tags.remove(tag)).getRoot())
+                .forEach(tagPane.getChildren()::add);
+
+        // Add listener for enter input
+        tagInput.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            tagErrorLabel.setText("");
+            if (event.getCode() == KeyCode.ENTER) {
+                event.consume();
+                try {
+                    String text = tagInput.getText();
+                    tagInput.clear();
+                    Tag tag = new Tag(text);
+                    tags.add(tag);
+                } catch (IllegalArgumentException e) {
+                    tagErrorLabel.setText(e.getMessage());
+                }
+            }
+        });
+
+        // Update FlowPane when tag set changes
+        tags.addListener((Observable observable) -> {
+            tagPane.getChildren().clear();
+            tags.stream()
+                    .map(tag -> new DeletableChip(tag.tagName, () -> tags.remove(tag)).getRoot())
+                    .forEach(tagPane.getChildren()::add);
+        });
+    }
+
+    private void initializeDialog(boolean isEditingTask) {
+        dialog.setTitle(isEditingTask ? "Edit Task" : "Add Task");
         dialog.getDialogPane().setPrefWidth(600);
         dialog.setResizable(true);
         dialog.getDialogPane().setContent(getRoot());
@@ -101,55 +157,6 @@ public class EditTaskDialog extends UiPart<Region> {
             if (!areFieldsValid()) {
                 event.consume();
             }
-        });
-
-        tags = task.map(Task::getTags)
-                .map(tags -> tags.toArray(new Tag[]{}))
-                .map(FXCollections::observableSet)
-                .orElse(FXCollections.observableSet());
-
-        title.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            titleErrorLabel.setVisible(false);
-            titleErrorLabel.setManaged(false);
-            if (event.getCode().equals(KeyCode.ENTER)) {
-                event.consume();
-                timestamp.requestFocus();
-            }
-        });
-
-        timestamp.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().equals(KeyCode.ENTER)) {
-                event.consume();
-                description.requestFocus();
-            }
-        });
-
-        tagInput.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            tagErrorLabel.setText("");
-            if (event.getCode().equals(KeyCode.ENTER)) {
-                event.consume();
-                try {
-                    String text = tagInput.getText();
-                    tagInput.clear();
-                    Tag tag = new Tag(text);
-                    tags.add(tag);
-                } catch (IllegalArgumentException e) {
-                    tagErrorLabel.setText(e.getMessage());
-                }
-            }
-        });
-
-        tags.stream()
-                .map(tag -> new DeletableChip(tag.tagName, () -> tags.remove(tag)).getRoot())
-                .forEach(tagPane.getChildren()::add);
-
-
-        // Update FlowPane containing a node for each selected filter
-        tags.addListener((Observable observable) -> {
-            tagPane.getChildren().clear();
-            tags.stream()
-                    .map(tag -> new DeletableChip(tag.tagName, () -> tags.remove(tag)).getRoot())
-                    .forEach(tagPane.getChildren()::add);
         });
     }
 
@@ -171,9 +178,9 @@ public class EditTaskDialog extends UiPart<Region> {
 
     private Task getTask() {
         return new Task(
-                title.getText(),
-                Optional.of(description.getText()).filter(text -> !text.isBlank()).orElse(null),
-                Optional.of(timestamp.getText()).filter(text -> !text.isBlank()).map(Timestamp::new).orElse(null),
+                title.getText().trim(),
+                Optional.of(description.getText().trim()).filter(text -> !text.isBlank()).orElse(null),
+                Optional.of(timestamp.getText().trim()).filter(text -> !text.isBlank()).map(Timestamp::new).orElse(null),
                 tags,
                 isDone.isSelected()
         );

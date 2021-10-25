@@ -43,8 +43,8 @@ public class DoneTaskCommand extends TaskCommand {
 
         Task task = taskList.get(index.getZeroBased());
         Task completedTask = new Task(task.getTitle(),
-                task.getDescription(),
-                task.getTimestamp(),
+                task.getDescription().orElse(null),
+                task.getTimestamp().orElse(null),
                 task.getTags(),
                 !task.getIsDone());
         this.completedTask = completedTask;

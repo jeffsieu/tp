@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.task.ListTaskCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.model.task.filters.TaskFilters;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 
 public class ListTaskCommandParserTest {
     private final ListTaskCommandParser parser = new ListTaskCommandParser();

@@ -158,6 +158,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Task edit feature
+
+#### Current Implementation
+
+The task editing mechanism is done almost entirely within `EditTaskCommand` and the `EditTaskCommandParser` objects within the `Logic` component. 
+Each edit is represented by an `EditTaskDescriptor` object, which contains the new value(s) to edit the data in the current task to.
+
+#### Example usage of `task edit`
+
+Step 1: The user adds a task to the task list.
+
+Step 2: The user types in the command `task edit 1 d\Example description` (suppose this string is called `s`) 
+The `GUI` parses and executes `s` by passing it to the `Logic` component, as seen below.
+
+![Sequence diagram](http://www.plantuml.com/plantuml/png/TLDDZzem4BtxLupI2-nk_m27Qlc8gggWea9FHK9kF4ij4XlP3cN_VSUEumJlBXVicJTltZnFdgtZnhLDpNZhDA-Sl7A7e1NxeszGhFL9LWLyMilJNxUeMsGNWijANhXoKCn2ViCLFw4fW5jORpB4N0Y3rYwqFc-viH4sNsmpt9xRyr8t3LTYXDilSrmff7iVMxu12xHLAbZHnSYBqnqQnJssqfVNZx0-Tu_6N4V0vUx4t4-qRUq2meGZGoM0_EqytcY1DNcybUgS4SGK5MQs8dL7uVi7um9ae6M_Ft-Xbu0Pu0shrk74JXdTAKh6KvYuB1vKrEUpp2SeJnx2myECfKtmfXfqhL4ZJEAOS7Dg6rIEA7oOicL70IEESaIIezxoq4zfluDNDFwPVgZw5Rg1uShh5kr1SODWqO5Ku1yvJEwBMDQqZErGP99GH46XVenxV9nvwdu5f5O7DIdA6sykDO8OmiKq6PFAkv4K_eD-FvBBn2ALmDjJu9YEf8pd3QksmXTKLbunN46_X1Ae319U3CCYzGoGzzhw0S8AJx9-lY0gxywKTqPxZraVntH8sVY8MVGk67SCHuitPTY7eluohIuvukXlhtteAMY9S4S33O9Tx90Q9OOa8ypHrMuWl9zFZ-b7LTEUA5Pq7-NWuTrdIo8tvMut_reUozMt_V6WzlFTz-Fkrt99uS7Mo999ZS7aS9z-HYNQfluF)
+
+Step 3: The GUI is updated to show the task at index 1 with the new description "Example Description".
+
+
+#### `EditTaskDescriptor` implementation
+
+`EditTaskDescriptor` is implemented as a public nested class within EditTaskCommand. It is used to contain the edited values that are provided by the user.
+`EditTaskDescriptor` has `get` and `set` methods that facilitate this operation:
+
+- `setTitle()` / `getTitle()`
+- `setDescription()` / `getDescription()`
+- `setTimestamp()` / `getTimestamp()`
+- `setTags()` / `getTags()`
+
+where the `get` methods return `Optional<T>` objects containing the value to be edited, if any.
+
+`EditTaskDescriptor` also has:
+1. A constructor which accepts another `EditTaskDescriptor`, which creates a defensive copy of the original, called solely within the constructor of `EditTaskCommand`.
+2. A `isAnyFieldEdited` method to facilitate error handling when the user does not provide any arguments to the command. 
+
+### Delete Feature
+
+#### Current Implementation
+
+The `delete` feature is implemented by acting on the current filtered`TaskList` with a one-based `Index` specified by the user, getting the target `Task` at the specified index, and removing it from the list.
+
+#### Example Usage of `task delete`
+
+1. User launches TaskMaster2103 and the `TaskList` is populated with existing `Task` entries.
+2. User types in the command `task delete 1`, where `1` is the specified index given in one-based form.
+3. The current state of the `TaskList` is obtained from `Model`.
+4. The `Task` to be deleted is fetched from the `TaskList` using the specified `Index`, using its zero-based form.
+5. The `Task` is deleted from the `Model`.
+6. The `GUI` is updated to show the new `TaskList` with the `Task` deleted.
+
 ### Undo Feature
 
 #### Current Implementation
@@ -165,40 +216,40 @@ This section describes some noteworthy details on how certain features are imple
 The current implementation of the `undo` feature is through storing the command history of the user in `CommandHistory`
 as a command stack, and popping off the stack whenever `undo` is called.
 
-The `Command` abstract class has an additional method `undo()` to be implemented by the inheriting class
-to model the correct undo behaviour. Commands that have previous states, such as `Find` with a specific `Predicate`
-stores the previous state in the class.
+The abstract class `Command` has an additional method `undo()` to be implemented by the inheriting class
+to model the correct undo behaviour. Commands that have previous states, such as `Find` with a specific `Predicate`,
+store the previous state in the class.
 
 `Redo` can be implemented by maintaining this `CommandHistory` stack instead of popping, and calling `execute` on the
 `Command` object again.
 
-#### Example Usage of `undo`
+#### Example usage of `undo`
 
 1. User launches TaskMaster2103 and a new `CommandHistory` object is initialised in `Model`.
 2. User invokes any valid command into TaskMaster2103 that successfully gets executed.
-3. The successfully invoked command gets stored in the `CommandHistory` stack through `LogicManger`.
-4. The user can now invoke `undo`, and when the user does so, the topmost `Command` in `CommandHistory` will be popped.
-5. The topmost `Command` that was popped with have its `undo()` method executed.
+3. The successfully invoked command gets stored in the `CommandHistory` stack through `LogicManager`.
+4. The user can now invoke `undo`, and when the user does so, the top-most `Command` in `CommandHistory` will be popped.
+5. The top-most `Command` that was popped with have its `undo()` method executed.
 6. The `undo()` method mutates `Model` to restore the state before the initial executiion of the command.
-7. The successfully invoked command gets stored in the `CommandHistory` stack through `LogicManger`.
-8. The user can now invoke `undo`, and when the user does so, the topmost `Command` in `CommandHistory` will be popped.
-9. The topmost `Command` that was popped with have its `undo()` method executed.
+7. The successfully invoked command gets stored in the `CommandHistory` stack through `LogicManager`.
+8. The user can now invoke `undo`, and when the user does so, the top-most `Command` in `CommandHistory` will be popped.
+9. The top-most `Command` that was popped with have its `undo()` method executed.
 10. The `undo()` method mutates `Model` to restore the state before the initial execution of the command.
 
 #### Implementation of `undo()`
 
-Each `Command` will have a different ways of implementing `undo()`, depending the type of command.
+Each `Command` will have a different way of implementing `undo()`, depending on the type of command.
 
 1. Object-mutating Command:
 
     - Add: Deletes the object at the last index
     - Delete: Adds the deleted task at the original deleted index
     - Edit: Restores the state to the pre-edit state
-    
+
 2. GUI View Commands:
 
     - Find/Sort/Filter: Restores the previous `Predicate` that was in the `FilteredList`
-    
+
 ### Task filter feature
 
 #### Current implementation
@@ -215,27 +266,52 @@ The task filtering mechanism is facilitated by `Model`. Each task filter is inte
 
 ##### Example usage of `addTaskFilter`
 
-Step 1. The user launches the application and creates a task with the tag `important`.
+Step 1. The user enters the command to filter tasks by the tag `important`.
 
-Step 2. The user adds the task filter `Tagged [important]`.
+Step 2. `ModelManager.recalculateFilteredTaskList()` is called. The selected `TaskFilter` instances are combined by
+mapping them to their respective predicates using `TaskFilter.getPredicate()`. The resultant predicates are
+combined by repeatedly applying `Predicate::and` on all predicates.
 
-![Sequence diagram](http://www.plantuml.com/plantuml/png/VL3DJiCm3BxxAQ9osGvxWMgQ1eSXf4tQ0HuWDEw85gTLuY0U7pk5qY74fNQ_dyzszfbjua81RCT3ClVrQxCf6HECmldEZpQoUNnvKbmAl0uVfZaE5zyrvkxeBs_y40hUg9ksyYSRxGLJeyv0WD4PCSEKS1eS1aau-tZzPQxKqanqg-XzO4pedcs-vlRmzNVqcRSAxQgfvv-9O0iFSgD_juncYA07cirE3sgDTSwm-CoK2o2eae4gfv7JZ1NFxHe2gOR-rT2iITZPq9LW6G-BxNNdrHeMmZAwlpJOzwZxurbGtubaTlNScemy4wjn8T5JjfkgcP85a849kQG8t_MsG23nR0nHjMiRQ7eoxGM3FKPNA7m2)
+Step 3. The resultant predicate represents the collective filtering achieved by applying every selected task filter.
 
-Step 3: The GUI is updated to show only tasks tagged Important.
+Step 4. The `FilteredList` representing the filtered task list is updated by calling
+`filteredTasks.setPredicate(predicate)`.
+
+Step 5. The GUI is updated automatically by JavaFX to show only tasks tagged `important`.
+
+The following sequence diagram shows the above steps.
+
+![Sequence diagram showing the recalculation of available task filters when a new task is added](images/AddTaskFilterSequenceDiagram.png)
 
 ##### Adding tasks
 
 Tasks can be filtered by tag. Whenever a task is added, the list of task filters will be recalculated to include the new tags introduced by adding that task.
 
+Step 1. The user adds a new task.
+
+Step 2. `Logic.addTask(task)` is called, which then delegates the responsibility to `ModelManager` via
+`ModelManager.addTask(task)`.
+
+Step 3. `ModelManager` recomputes task filter options with `recomputeAvailableTaskFilters()`.
+
+Step 4. The new list will contain task filters representing done, and undone tasks.
+
+Step 5. All `Tag`s are extracted from every task in the task list, and collected in a `Set`.
+
+Step 6. Each `Tag` is mapped into a `TaskFilter` matching tasks that contain that corresponding tag.
+
+Step 7. The list of available task filters is updated and reflected in the GUI.
+The list of active filters remains unchanged.
+
 The following sequence diagram shows how task filters are recalculated on the addition of a task.
 
-![Sequence diagram](http://www.plantuml.com/plantuml/png/bOvDKiCm38NtFeKcRCA22sIOJik2LJgmu09Ah0PF9JjZou7ZuxhJK7vOiB76x-bxUjka63KBco6yGzE7oOqDtFHkUjK7pcJcOhlHpUWLcgxwU_GuKMm04x0OyXOAV0xO1qjS0fwTFtvZgtNDYdpTm0KTuy3qWkduw5WffWwUXaHnESczIth_wMrg2EfXRM0mQy1HtO9A4Bovsm1B1sZj2MkrFBU61OekFtHPzKXZa3ahxNvfr5usKGyTZ4mOYrG-gvPdYrhRaZy3aJH7RovpvMk57NFhwUtgn3_Z_ffRyZOBVm00)
+![Sequence diagram showing the update to task filters when a new task is added](images/AddTaskUpdateTaskFilterSequenceDiagram.png)
 
 ##### Deleting tasks
 
 Deleting tasks may cause associated tags to be deleted from the entire task list. If a tag is deleted, its corresponding task filter will have to be deleted.
 
-![Delete task activity diagram](http://www.plantuml.com/plantuml/png/bOynJi0m34Ltdy8RxHMQWGwS036oXEO78foar4ubRa_QY86HBVfvxqbUrVnXBGlT3rgUyTMWnkRramC4bcfnb29FBzUqrM8-5Hr_21ryryUPxGE5fs_eJCozakk9Fyp3ICOaXaDVIpngPd_w9FvDuFvZAGHR9tvdHn05JwNEX19IfENfRjookuxQQjvR7uQ1CBAIr1ofrPtMBhOiFm00)
+![Activity diagram showing the task filter list's update when a task is deleted](images/DeleteTaskActivityDiagram.png)
 
 ##### `TaskFilter` implementation
 

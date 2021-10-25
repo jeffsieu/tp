@@ -47,19 +47,17 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        if (argMultimap.getValue(PREFIX_TITLE).isPresent()) {
-            editTaskDescriptor.setTitle(ParserUtil
-                    .parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editTaskDescriptor.setDescription(ParserUtil
-                    .parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
-        }
-        if (argMultimap.getValue(PREFIX_TIMESTAMP).isPresent()) {
-            editTaskDescriptor.setTimestamp(ParserUtil
-                    .parseTimestamp(argMultimap.getValue(PREFIX_TIMESTAMP).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
+        argMultimap.getValue(PREFIX_TITLE)
+                .map(ParserUtil::parseTitle)
+                .ifPresent(editTaskDescriptor::setTitle);
+        argMultimap.getValue(PREFIX_DESCRIPTION)
+                .map(ParserUtil::parseDescription)
+                .ifPresent(editTaskDescriptor::setDescription);
+        argMultimap.getValue(PREFIX_TIMESTAMP)
+                .map(ParserUtil::parseTimestamp)
+                .ifPresent(editTaskDescriptor::setTimestamp);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
+                .ifPresent(editTaskDescriptor::setTags);
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);

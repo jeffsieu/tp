@@ -65,4 +65,33 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Limits the length of a target string if it is longer than a specified maximum length.
+     * If {@code replacementString} is non-empty, it will be appended to the target string,
+     * after trimming the target string further to accommodate it. This ensures the total
+     * length of {@code targetString} and {@code replacementString} fits within {@code maxLength}.
+     *
+     * @param targetString the string to be trimmed if longer than the specified length
+     * @param replacementString the string to be appended to the target string if trimming is
+     *                          carried out
+     * @param maxLength The maximum length of the target string
+     * @return the new string after checking its length and trimming
+     */
+    public static String limitString(String targetString, String replacementString, int maxLength) {
+        requireNonNull(targetString);
+        requireNonNull(replacementString);
+        assert maxLength > 0;
+        assert replacementString.length() < maxLength;
+
+        if (targetString.length() > maxLength) {
+            String newString = targetString.substring(0, maxLength - replacementString.length());
+            newString += replacementString;
+            return newString;
+        } else {
+            return targetString;
+        }
+    }
+
+
 }

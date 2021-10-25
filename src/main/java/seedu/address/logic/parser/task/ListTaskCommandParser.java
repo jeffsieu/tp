@@ -15,8 +15,8 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.model.task.filters.TaskFilters;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 
 public class ListTaskCommandParser implements Parser<ListTaskCommand> {
     /**
@@ -36,7 +36,7 @@ public class ListTaskCommandParser implements Parser<ListTaskCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_UNDONE).isPresent()) {
-            taskFilters.add(TaskFilters.FILTER_DONE.invert());
+            taskFilters.add(TaskFilters.FILTER_UNDONE);
         }
 
         if (!argMultimap.getPreamble().isEmpty()) {

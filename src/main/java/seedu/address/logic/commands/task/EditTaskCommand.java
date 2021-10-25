@@ -71,9 +71,9 @@ public class EditTaskCommand extends TaskCommand {
         String updatedTitle = editTaskDescriptor.getTitle()
                 .orElse(taskToEdit.getTitle());
         String updatedDescription = editTaskDescriptor.getDescription()
-                .orElse(taskToEdit.getDescription());
+                .or(taskToEdit::getDescription).orElse(null);
         Timestamp updatedTimestamp = editTaskDescriptor.getTimestamp()
-                .orElse(taskToEdit.getTimestamp());
+                .or(taskToEdit::getTimestamp).orElse(null);
         Set<Tag> updatedTags = editTaskDescriptor.getTags()
                 .orElse(taskToEdit.getTags());
 
@@ -173,9 +173,9 @@ public class EditTaskCommand extends TaskCommand {
             requireNonNull(toCopy);
             EditTaskDescriptor descriptor = new EditTaskDescriptor();
             descriptor.setTitle(toCopy.getTitle());
-            descriptor.setTimestamp(toCopy.getTimestamp());
+            descriptor.setTimestamp(toCopy.getTimestamp().orElse(null));
             descriptor.setTags(toCopy.getTags());
-            descriptor.setDescription(toCopy.getDescription());
+            descriptor.setDescription(toCopy.getDescription().orElse(null));
             return descriptor;
         }
 

@@ -15,8 +15,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.model.task.filters.TaskFilters;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
 
 public class ListTaskCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(), new UserPrefs());

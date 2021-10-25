@@ -48,16 +48,8 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         title = source.getTitle();
-        if (source.getDescription() != null) {
-            description = source.getDescription();
-        } else {
-            description = "null";
-        }
-        if (source.getTimestamp() != null) {
-            timestamp = source.getTimestamp().toString();
-        } else {
-            timestamp = "null";
-        }
+        description = source.getDescription().orElse("null");
+        timestamp = source.getTimestamp().map(Timestamp::toString).orElse("null");
         if (source.getIsDone()) {
             isDone = "Done";
         } else {
@@ -108,9 +100,8 @@ class JsonAdaptedTask {
         } else {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isDone"));
         }
-        Task modelTask = new Task(title, modelDescription, modelTimeStamp, modelTags, modelIsDone);
 
-        return modelTask;
+        return new Task(title, modelDescription, modelTimeStamp, modelTags, modelIsDone);
     }
 
 }

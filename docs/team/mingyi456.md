@@ -40,7 +40,7 @@ Programming competencies: C/C++, Java, Python
 
 - Worked on a greenfield project on a basic task management chatbot in Java.
 
-#### (In progress) PC3288 Advanced UROPS in Physics I 
+#### (In progress) PC3288 Advanced UROPS in Physics I
 
 - Working to help develop an automated ion beam targeting system for facilitating ion beam therapy research on cancer cells in Python.
 

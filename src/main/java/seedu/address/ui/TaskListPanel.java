@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.ui.exceptions.GuiException;
 
 public class TaskListPanel extends UiPart<Region> {

@@ -12,7 +12,7 @@ Technologies: ReactJS, Flutter
 
 ## Work Experience
 
-NA (Enlisted in the RSAF)   
+NA (Enlisted in the RSAF)
 
 ## Projects and Competitions
 

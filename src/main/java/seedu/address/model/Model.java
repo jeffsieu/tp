@@ -9,7 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.guiactions.GuiAction;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.filters.TaskFilters.TaskFilter;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.storage.CommandHistory;
 
 /**
